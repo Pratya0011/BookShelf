@@ -77,7 +77,7 @@
 .form-container > div {
     position: relative;
     right: -100%;
-    transition: right 3s ; 
+    transition: right 3s ease; 
   }
   
   .form-container.loaded > div {
