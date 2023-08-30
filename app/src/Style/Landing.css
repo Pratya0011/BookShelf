@@ -1,0 +1,94 @@
+.landing{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    min-height: 100vh;
+    background-color: rgb(252, 240, 217);
+}
+.container{
+    background-color: white;
+    height: 100vh;
+    width: 90vw;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.image{
+    height: 100%;
+    width: 50%;
+    background-image: url('../Image/img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content:space-between;
+    flex-direction: column;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+}
+.image .app-title{
+    color: rgb(252, 240, 217);
+    background-color: rgba(255, 255, 255, 0.073);
+    padding: 10px;
+    font-size: 30px;
+    font-weight: 600;
+    margin: 20px 20px 60px 20px;
+    padding: 20px;
+    opacity: 0; /* Start with 0 opacity */
+    animation: fadeIn 4s ease forwards;
+}
+.image .about{
+    color: white;
+    background-color: rgba(255, 255, 255, 0.406);
+    padding: 10px;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 20px 20px 60px 20px;
+    padding: 20px;
+    border: 1px solid white;
+    opacity: 0; 
+    animation: fadeIn 4s ease forwards;
+}
+@keyframes fadeIn {
+    from {
+      opacity: 0; 
+      transform: translateY(-20px); 
+    }
+    to {
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+.form-container{
+    padding-top: 8rem;
+    position: relative;
+    overflow: hidden;
+}
+.toggle-form{
+    font-size: 15px;
+    padding-left: 6.8rem;
+    color: rgb(174, 173, 173);
+}
+.toggle-form span{
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+.form-container > div {
+    position: relative;
+    right: -100%;
+    transition: right 3s ease; 
+  }
+  
+  .form-container.loaded > div {
+    right: 0; 
+  }
+  .form-container > p {
+    position: relative;
+    right: -100%;
+    transition: right 3s ease; 
+  }
+  
+  .form-container.loaded > p {
+    right: 0; 
+  }

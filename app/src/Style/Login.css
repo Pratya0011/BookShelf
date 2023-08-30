@@ -1,0 +1,68 @@
+.login{
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.login form{
+    display: flex;
+    flex-direction: column;
+    min-height: 70%;
+    width: 70%;
+    padding: 20px;
+
+}
+.login form p{
+    margin: 0.8rem 0 0 0;
+    color: rgb(174, 173, 173);
+}
+.login form .fields{
+    margin-top: 15px;
+    display: flex;
+    height: 60%;
+    flex-direction: column;
+}
+.login form label{
+    margin: 1rem 0 0 5px;
+    font-weight: 600;
+    font-size: 15px;
+}
+.login form input{
+    height: 2rem;
+    padding:2px 0 2px 10px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 8px;
+    margin-top: 5px;
+    width: 80%;
+}
+.login form .forgot{
+    color: black;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.login form .google{
+    display: flex;
+    justify-content: center;
+    width: 78%;
+    margin: 1.2rem 3rem 0rem 5px;
+}
+
+
+.login form button{
+    height: 2rem;
+    padding:2px 10px 2px 10px;
+    width: 80%;
+    border-radius: 8px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 1.2rem 0 0rem 5px;
+    cursor: pointer;
+}
