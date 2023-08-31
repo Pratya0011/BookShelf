@@ -22,22 +22,17 @@ function Login() {
       picture:credential.picture,
       role:'user'
     }).then(res=>{
-      if(res.data.status === 200){
         toast.success(res.data.message)
         localStorage.setItem('accessToken',res.data.accessToken)
         localStorage.setItem('refreshToken',res.data.refreshToken)
         localStorage.setItem('userId',res.data.userId)
         setTimeout(()=>{
-          navigate('/Home')
+          window.location.reload()
         },1000)
         console.log(res.data.userId)
-      }else if(res.data.status === 403){
-        toast.error(res.data.message)
-      }else{
-        toast.error(res.data.message)
-      }
     }).catch(err=>{
-      toast.error(err.message)
+      console.log(err)
+      toast.error(err.response.data.message)
     })
   };
   const onErrorHandler = () => {
@@ -49,22 +44,17 @@ function Login() {
       email,
       password
     }).then(res=>{
-      if(res.data.status === 200){
         toast.success(res.data.message)
         localStorage.setItem('accessToken',res.data.accessToken)
         localStorage.setItem('refreshToken',res.data.refreshToken)
         localStorage.setItem('userId',res.data.userId)
         setTimeout(()=>{
-          navigate('/Home')
+          window.location.reload()
         },1000)
         console.log(res.data.userId)
-      }else if(res.data.status === 401){
-        toast.error(res.data.message)
-      }else{
-        toast.error(res.data.message)
-      }
     }).catch(err=>{
-      toast.error(err.message)
+      console.log(err)
+      toast.error(err.response.data.message)
     })
   }
   return (
@@ -98,7 +88,7 @@ function Login() {
             <GoogleLogin
               onSuccess={onSuccessHandler}
               onError={onErrorHandler}
-              width="380px"
+              width={window.innerWidth <= 430?"300px":"380px"}
               shape="rectangle"
               size="medium"
               theme="outline"

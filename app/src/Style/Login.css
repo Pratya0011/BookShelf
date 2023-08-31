@@ -66,3 +66,35 @@
     margin: 1.2rem 0 0rem 5px;
     cursor: pointer;
 }
+
+@media (max-width:430px){
+    .login{
+        width: 100vw;
+    }
+    .login form{
+        min-height: 70%;
+        width: 100%;
+        padding: 20px 0 10px 20px;
+    }
+    .login form p{
+        margin: 0.2rem 0 0 0;
+
+    }
+    .login form .fields{
+        margin-top: 0px;
+        display: flex;
+        height: 100%;
+    }
+    .login form .forgot{
+        margin-top: 10px;
+    }
+    .login form button{
+        width: 300px;
+        padding:2px 10px 2px 10px;
+    }
+    .login form .google{
+        padding:2px 10px 2px 0px;
+        margin: 1.2rem 0 0rem 0px;
+        
+    }
+}

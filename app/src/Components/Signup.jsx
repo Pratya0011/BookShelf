@@ -19,14 +19,10 @@ function Signup() {
       email,
       password
     }).then(res=>{
-      if(res.data.status === 200){
         toast.success(res.data.message)
         window.location.reload()
-      }else{
-        toast.error(res.data.message)
-      }
     }).catch(err=>{
-      toast.err(err.name)
+      toast.err(err.response.data.message)
     })
   }
 }

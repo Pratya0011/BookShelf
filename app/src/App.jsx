@@ -26,18 +26,12 @@ function App() {
         axios
           .post(`${auth.authenticate}/${id}`, {}, { headers })
           .then((res) => {
-            if (res.data.status === 200) {
               localStorage.setItem("accessToken", res.data.accessToken);
               setState(true);
-              console.log(res)
-            } else {
-              setState(false);
-              // dispatch(setMessage(res.data.message))
-              console.log(res)
-            }
           })
           .catch((err) => {
-            console.log(err);
+            console.log(err.response.data.message);
+            setState(false)
           });
         
       }
@@ -50,8 +44,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route exact path = '/' element={<Landing/>}></Route>
-          <Route path = '/Home' element={<Home/>}></Route>
+          <Route exact path = '/' element={state?<Home/>:<Landing/>}></Route>
         </Routes>
       </Router>
     </div>

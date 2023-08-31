@@ -4,12 +4,11 @@
     align-items: center;
     margin: auto;
     min-height: 100vh;
-    background-color: rgb(252, 240, 217);
 }
 .container{
     background-color: white;
     height: 100vh;
-    width: 90vw;
+    width: 100vw;
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -28,7 +27,6 @@
 .image .app-title{
     color: rgb(252, 240, 217);
     background-color: rgba(255, 255, 255, 0.073);
-    padding: 10px;
     font-size: 30px;
     font-weight: 600;
     margin: 20px 20px 60px 20px;
@@ -91,4 +89,36 @@
   
   .form-container.loaded > p {
     right: 0; 
+  }
+
+  @media (max-width:430px){
+    .container{
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .image{
+    height: 30%;
+    width: 100%;
+  }
+  .image .app-title{
+    font-size: 20px;
+    margin: 10px 10px 40px 0px;
+  }
+  .image .about{
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    margin:  10px 0px 50px 10px;
+    padding: 5px;
+  }
+  .form-container{
+    padding-top: 0rem;
+}
+.toggle-form{
+ padding-left: 1.1rem;
+}
   }

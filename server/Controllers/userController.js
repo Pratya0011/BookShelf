@@ -10,8 +10,7 @@ export const signup = async (req,res)=>{
     try{
         const user = await User.findOne({email:email})
         if(user){
-            res.send({
-                status:409,
+            res.status(409).send({
                 message:"User already exists"
             })
         }else{
@@ -59,14 +58,12 @@ export const signup = async (req,res)=>{
                   console.log('Email sent:', info.response);
                 }
               });
-            res.send({
-                status:200,
+            res.status(200).send({
                 message:'Signup successful'
             })
         }
     }catch(err){
-        res.send({
-            status:500,
+        res.status(500).send({
             message:'Internal server error'
         })
     }
@@ -74,28 +71,27 @@ export const signup = async (req,res)=>{
 
 export const login = async(req,res)=>{
     const {email , password}=  req.body;
+    const header = { algorithm: 'HS256', typ: 'JWT' };
     try{
         const user=await User.findOne({email:email});
         if(!user){
-            res.send({
-                status:403,
+            return res.status(403).send({
                 message : `Email doesn't exist`
             })
         }else{
             bcrypt.compare(password, user.password).then((isPasswordValid)=>{
                 if (isPasswordValid ){
                     const accessToken = jwt.sign(
-                        {userId:user._id},
+                        {jti:user._id},
                         process.env.JWT_SECRET,
-                        {expiresIn:"1m"}
+                        {expiresIn:"1m",header:header}
                     );
                     const refreshToken = jwt.sign(
-                        { userId: user._id },
+                        { jti: user._id },
                         process.env.JWT_REFRESHSECRET,
-                        { expiresIn: "30d" }
+                        { expiresIn: "30d",header:header }
                       );
-                      res.send({
-                        status: 200,
+                    return res.status(200).send({
                         name: user.name,
                         email:user.email,
                         id: user._id,
@@ -104,21 +100,18 @@ export const login = async(req,res)=>{
                         refreshToken: refreshToken,
                       });
                 }else{
-                    res.send({
-                        status:403,
+                    return res.status(403).send({
                         message:'Invalid Password'
                     })
                 }
             }).catch(err=>{
-                res.send({
-                    status:404,
-                    message:err.name
+               return res.status(404).send({
+                    message:'invalid'
                 })
             })
         }
     }catch(err){
-        res.send({
-            status:500,
+        res.status(500).send({
             message:'Internal server error'
         })
     }
@@ -129,25 +122,24 @@ export const googleAuth = async(req,res)=>{
     const {name,email,role,picture} = req.body
     try{
         if(!clientId){
-            res.send({
-                status:401,
+            res.status(401).send({
                 message:'Could not Login'
             })
         }else{
             const user = await User.findOne({email:email})
+            const header = { algorithm: 'HS256', typ: 'JWT' };
             if(user){
                 const accessToken = jwt.sign(
-                    {userId:user._id},
+                    {jti:user._id},
                     process.env.JWT_SECRET,
-                    {expiresIn:"1m"}
+                    {expiresIn:"1m",header:header}
                 );
                 const refreshToken = jwt.sign(
-                    { userId: user._id },
+                    { jti: user._id },
                     process.env.JWT_REFRESHSECRET,
-                    { expiresIn: "30d" }
+                    { expiresIn: "30d",header:header }
                   );
-                res.send({
-                    status:200,
+                res.status(200).send({
                     userId:user._id,
                     message:'Login Successful',
                     accessToken: accessToken,
@@ -206,8 +198,7 @@ export const googleAuth = async(req,res)=>{
                       console.log('Email sent:', info.response);
                     }
                   });
-                res.send({
-                    status:200,
+                res.status(200).send({
                     userId: savedUser._id,
                     message:'Signup successful',
                     accessToken: accessToken,
@@ -216,8 +207,7 @@ export const googleAuth = async(req,res)=>{
             }
         }
     }catch(err){
-        res.send({
-            status:500,
+        res.status(500).send({
             message:'Internal server error'
         })
     }
