@@ -23,10 +23,21 @@ function Login() {
       role:'user'
     }).then(res=>{
       if(res.data.status === 200){
-        console.log(res.data)
+        toast.success(res.data.message)
+        localStorage.setItem('accessToken',res.data.accessToken)
+        localStorage.setItem('refreshToken',res.data.refreshToken)
+        localStorage.setItem('userId',res.data.userId)
+        setTimeout(()=>{
+          navigate('/Home')
+        },1000)
+        console.log(res.data.userId)
+      }else if(res.data.status === 403){
+        toast.error(res.data.message)
+      }else{
+        toast.error(res.data.message)
       }
     }).catch(err=>{
-      throw err
+      toast.error(err.message)
     })
   };
   const onErrorHandler = () => {
@@ -39,10 +50,21 @@ function Login() {
       password
     }).then(res=>{
       if(res.data.status === 200){
-        navigate('/Home')
+        toast.success(res.data.message)
+        localStorage.setItem('accessToken',res.data.accessToken)
+        localStorage.setItem('refreshToken',res.data.refreshToken)
+        localStorage.setItem('userId',res.data.userId)
+        setTimeout(()=>{
+          navigate('/Home')
+        },1000)
+        console.log(res.data.userId)
+      }else if(res.data.status === 401){
+        toast.error(res.data.message)
+      }else{
+        toast.error(res.data.message)
       }
     }).catch(err=>{
-      throw err
+      toast.error(err.message)
     })
   }
   return (

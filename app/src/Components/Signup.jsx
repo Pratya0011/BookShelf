@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "../Style/Login.css";
-import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios'
+import { auth } from "./request";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -11,16 +11,29 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
 
-  const onSuccessHandler = async (response) => {
-    console.log(response);
-  };
-  const onErrorHandler = () => {
-    toast.fail("Could not login");
-  };
+ const onSubmitHandler=(e)=>{
+  e.preventDefault()
+  if( password === cpassword){
+    axios.post(`${auth.signup}`,{
+      name,
+      email,
+      password
+    }).then(res=>{
+      if(res.data.status === 200){
+        toast.success(res.data.message)
+        window.location.reload()
+      }else{
+        toast.error(res.data.message)
+      }
+    }).catch(err=>{
+      toast.err(err.name)
+    })
+  }
+}
   return (
     <div>
       <div className="login">
-        <form>
+        <form onSubmit={onSubmitHandler}>
           <h1>Welcome !</h1>
           <p>Please enter your details.</p>
           <div className="fields">
@@ -67,6 +80,12 @@ function Signup() {
             <button type="submit">Sign up</button>
           </div>
         </form>
+        <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        theme="light"
+      />
       </div>
     </div>
   );

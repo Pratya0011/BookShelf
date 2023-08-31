@@ -6,6 +6,7 @@ config();
 export const authenticateToken = (req, res, next) => {
   let accessToken = req.header("access");
   let refreshToken = req.header("refresh");
+  let id = req.params.id
   if (!accessToken) {
     return res.status(401).send({ message: "Access not allowed" });
   } else {
@@ -37,6 +38,7 @@ export const authenticateToken = (req, res, next) => {
                     status: 200,
                     accessToken: newAccessToken,
                     message: "Access Allowed",
+                    id:id
                   });
                   next();
                 }
@@ -51,6 +53,7 @@ export const authenticateToken = (req, res, next) => {
           status: 200,
           accessToken: accessToken,
           message: "Access Allowed",
+          id:id
         });
         next();
       }
