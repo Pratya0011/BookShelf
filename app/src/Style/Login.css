@@ -14,6 +14,7 @@
     padding: 20px;
 
 }
+
 .login form p{
     margin: 0.8rem 0 0 0;
     color: rgb(174, 173, 173);
@@ -59,7 +60,8 @@
     width: 80%;
     border-radius: 8px;
     border: none;
-    background-color: black;
+    /* background-color: #44d826; */
+    background-color: #ff8b3d;
     color: white;
     font-weight: 500;
     font-size: 15px;

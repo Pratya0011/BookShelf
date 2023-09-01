@@ -25,7 +25,7 @@
     animation: fadeIn 2s ease forwards;
 }
 .image .app-title{
-    color: rgb(252, 240, 217);
+    color: #ff8b3d;
     background-color: rgba(255, 255, 255, 0.073);
     font-size: 30px;
     font-weight: 600;
@@ -68,7 +68,7 @@
     color: rgb(174, 173, 173);
 }
 .toggle-form span{
-    color: black;
+    color: #ff8b3d;
     font-weight: 600;
     cursor: pointer;
 }
