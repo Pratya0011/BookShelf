@@ -88,7 +88,7 @@ function Login() {
             <GoogleLogin
               onSuccess={onSuccessHandler}
               onError={onErrorHandler}
-              width={window.innerWidth <= 430?"300px":"380px"}
+              width={window.innerWidth <= 430?"300px":"350px"}
               shape="rectangle"
               size="medium"
               theme="outline"
