@@ -4,6 +4,7 @@ import connection from './db/index.js'
 import cors from 'cors'
 import { config } from "dotenv";
 import userRouter from './Routes/userRoutes.js'
+import bookRouter from './Routes/bookRoutes.js'
 
 config()
 const app = express()
@@ -21,6 +22,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/user',userRouter)
+app.use('/user',bookRouter)
 connection.then(()=>{
     app.listen(process.env.PORT, ()=>{
         console.log(`Server is running on port ${process.env.PORT}`)
