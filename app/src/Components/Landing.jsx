@@ -4,6 +4,7 @@ import Login from "./Login";
 import "../Style/Landing.css";
 import Signup from "./Signup";
 import { setIsLogin } from "../features/appSlice";
+import img from '../Image/BS Final.png'
 
 function Landing() {
   const [span, setSpan] = useState("Sign up");
