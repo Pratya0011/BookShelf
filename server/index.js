@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/user',userRouter)
-app.use('/user',bookRouter)
+app.use('/books',bookRouter)
 connection.then(()=>{
     app.listen(process.env.PORT, ()=>{
         console.log(`Server is running on port ${process.env.PORT}`)

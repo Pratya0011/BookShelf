@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Landing from './Components/Landing'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import Home from './Components/Home'
 import { auth } from './Components/request'
 import axios from 'axios'
+import Library from './Components/Library'
+import Activity from './Components/Activity'
+import MyLibrary from './Components/MyLibrary'
+import Premium from './Components/Premium'
 
 function App() {
   const [state,setState] = useState(false)
@@ -44,7 +47,10 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route exact path = '/' element={state?<Home/>:<Landing/>}></Route>
+          <Route exact path = '/' element={state?<Library/>:<Landing/>}></Route>
+          <Route path = '/activity' element={state?<Activity/>:<Landing/>}></Route>
+          <Route path = '/mylibrary' element={state?<MyLibrary/>:<Landing/>}></Route>
+          <Route path='/premium' element={state?<Premium/>:<Landing/>}></Route>
         </Routes>
       </Router>
     </div>

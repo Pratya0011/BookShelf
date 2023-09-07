@@ -10,7 +10,7 @@ export const getBooks = async (req,res)=>{
         res.status(200).send(
             {
                 books,
-                booksCount:result.length
+                booksCount:books.length
             }
             )
     }catch(err){
@@ -32,6 +32,70 @@ export const romanceBooks = async (req,res)=>{
             })
         }
     }catch(err){
-        res.status(500).send({message:'Internal server error'})
+      return  res.status(500).send({message:'Internal server error'})
+    }
+}
+
+export const fantacyBooks = async (req,res)=>{
+    try{
+        const books=await content.find({'bookType': 'fantasy'})
+        if(!books){
+            return res.status(404).send({message:'No books found'})
+        }else{
+            return res.status(200).send({
+                books,
+                booksCount :books.length
+            })
+        }
+    }catch(err){
+        return  res.status(500).send({message:"internal Server Error"})
+    }
+}
+
+export const flowerBooks = async (req,res)=>{
+    try{
+        const books = await content.find({'bookType': 'flower'})
+        if(!books){
+            return   res.status(404).send({message:'no book found'})
+        }else{
+            return res.status(200).send({
+                books,
+                booksCount :books.length
+            })
+        }
+    }catch(err){
+        return  res.status(500).send({message:"internal Server Error"})
+    }
+}
+
+export const poetryBooks = async(req,res)=>{
+    try{
+        const books = await content.find({'bookType':'poetry'})
+        if(!books){
+            return   res.status(404).send({message:'no book found'})
+        }else{
+            return res.status(200).send({
+                books,
+                booksCount :books.length
+            })
+        }
+    }catch(err){
+        return  res.status(500).send({message:"internal Server Error"})
+    }
+}
+
+export const premiumBooks = async (req,res)=>{
+    try{
+        const books = await content.find({'bookType':'mostpopular'})
+        if(!books){
+            return   res.status(404).send({message:'no book found'})
+        }else{
+            return res.status(200).send({
+                books,
+                booksCount :books.length
+            })
+        }
+    }catch(err){
+        return  res.status(500).send({message:"internal Server Error"})
     }
 }

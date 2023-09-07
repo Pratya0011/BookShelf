@@ -6,3 +6,12 @@ export const auth = {
     signup: `${baseUrl}/user/signup`,
     authenticate: `${baseUrl}/user/authenticate`
 }
+
+export const books = {
+    allBooks :`${baseUrl}/books/allbooks`,
+    romanceBooks : `${baseUrl}/books/getromance`,
+    poetryBooks : `${baseUrl}/books/getpoetry`,
+    flowerBooks : `${baseUrl}/books/getflower`,
+    fantacyBooks : `${baseUrl}/books/getfantacy`,
+    premiumBooks : `${baseUrl}/books/getpremium`
+}

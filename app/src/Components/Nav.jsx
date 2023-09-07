@@ -18,7 +18,7 @@ function Nav() {
     window.location.reload()
   }
   return (
-    <nav className="bg-white fixed w-full z-20 top-0 left-0 ">
+    <nav className="bg-slate-200 fixed w-full z-20 top-0 left-0 ">
       <div className=" max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <NavLink className="flex items-center">
           <img
@@ -31,6 +31,7 @@ function Nav() {
           </span>
         </NavLink>
         <div className="flex md:order-2">
+        <div className="mr-8 mt-1.5 cursor-pointer"><i className="fa-solid fa-bell"></i></div>
           <button
             type="button"
             className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -41,11 +42,12 @@ function Nav() {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-8 h-8 rounded-full"
-              src="https://lh3.googleusercontent.com/a/AAcHTtfzuq5u9XfSFZ5Aj0NmWot1mLB2lBCpuMZ8r399SeDWV8M=s96-c
-          "
+              src="https://lh3.googleusercontent.com/a/AAcHTtfzuq5u9XfSFZ5Aj0NmWot1mLB2lBCpuMZ8r399SeDWV8M=s96-c"
               alt="user photo"
             />
           </button>
+          
+          {/* Dropdown */}
           {/* Dropdown menu */}
           {isDropdownOpen && (
             <div
@@ -128,9 +130,10 @@ function Nav() {
           } items-center justify-between w-full md:flex md:w-auto md:order-1`}
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
+          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-slate-200">
             <li>
               <NavLink
+              to='/'
                 className="block py-2 pl-3 pr-4 text-black  rounded md:bg-transparent  md:p-0 "
                 aria-current="page"
               >
@@ -138,17 +141,23 @@ function Nav() {
               </NavLink>
             </li>
             <li>
-              <NavLink className="block py-2 pl-3 pr-4  rounded  md:hover:bg-transparent md:p-0 dark:text-black md:dark:hover:bg-transparent">
+              <NavLink 
+              to='/activity'
+              className="block py-2 pl-3 pr-4  rounded  md:hover:bg-transparent md:p-0 dark:text-black md:dark:hover:bg-transparent">
                 <i className="fas fa-tasks text-xs"></i>{" "}{" "}Activity
               </NavLink>
             </li>
             <li>
-              <NavLink className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0  dark:text-black   md:dark:hover:bg-transparent ">
+              <NavLink 
+              to='/mylibrary'
+              className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0  dark:text-black   md:dark:hover:bg-transparent ">
               <i className="fa-solid fa-book text-xs"></i>{" "}{" "} My Library
               </NavLink>
             </li>
             <li>
-              <NavLink className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0  dark:text-black   md:dark:hover:bg-transparent ">
+              <NavLink 
+              to='/premium'
+              className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0  dark:text-black   md:dark:hover:bg-transparent ">
               <i className="fas fa-crown text-xs text-yellow-400"></i>{" "}{" "}Premium Books
               </NavLink>
             </li>
