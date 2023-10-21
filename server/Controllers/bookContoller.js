@@ -99,3 +99,19 @@ export const premiumBooks = async (req,res)=>{
         return  res.status(500).send({message:"internal Server Error"})
     }
 }
+
+export const discoverBooks = async (req, res)=>{
+    try{
+        const books = await content.find({'bookType':'mostpopular'}).limit(4)
+        if(!books){
+            return res.status(404).send({message:'No books found'})
+        }else{
+            return res.status(200).send({
+                books,
+                bookType:books.length
+            })
+        }
+    }catch(err){
+        return res.status(500).send({message:"Internal server Error"})
+    }
+}

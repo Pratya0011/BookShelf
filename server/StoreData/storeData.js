@@ -51,7 +51,19 @@ const storeData = async ()=>{
     });
 
     // Log the data array after the stream completes
-    await content.create(data);
+    // await content.create(data);
+    const randomArray = [];
+  for (let i = 0; i < 10; i++) {
+    const randomNumber = Math.floor(Math.random() * 900) + 100;
+    randomArray.push(randomNumber);
+  }
+    const premiumData = data.filter(item=> item.bookType==='mostpopular').map((item)=>{
+      item.price = randomArray[Math.floor(Math.random()*randomArray.length)]
+      return item
+  })
+    const restData = data.filter(item=>item.bookType!=='mostpopular')
+    let mainData = [...restData,...premiumData]
+    await content.create(mainData)
   }catch(err){
     console.log(err)
   }

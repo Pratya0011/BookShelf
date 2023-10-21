@@ -1,11 +1,14 @@
 import React from "react";
 import Nav from "./Nav";
 import book from '../Image/book.jpg'
+import Discover from "./Discover";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function Library() {
   return (
     <div>
-      <Nav />
+      {<Nav /> || <Skeleton/>}
       <div className="mt-16 ">
         <div className="flex bg-slate-100">
         <div className="w-3/6 h-50 flex justify-center flex-col p-10">
@@ -18,6 +21,7 @@ function Library() {
           <img src="http://books.google.com/books/content?id=qYr5zgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" height='150px' width='150px' />
         </div>
         </div>
+        <Discover/>
       </div>
     </div>
   );

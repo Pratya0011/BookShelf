@@ -22,6 +22,10 @@ const contentSchema = new Schema({
     publishedDate:{
         type: String
     },
+    price:{
+        type:Number,
+        default: 0
+    },
     publisher:{
         type:String
     },

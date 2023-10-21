@@ -13,5 +13,6 @@ export const books = {
     poetryBooks : `${baseUrl}/books/getpoetry`,
     flowerBooks : `${baseUrl}/books/getflower`,
     fantacyBooks : `${baseUrl}/books/getfantacy`,
-    premiumBooks : `${baseUrl}/books/getpremium`
+    premiumBooks : `${baseUrl}/books/getpremium`,
+    discoverBooks : `${baseUrl}/books/discover`
 }
