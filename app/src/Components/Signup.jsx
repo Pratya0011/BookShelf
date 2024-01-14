@@ -1,9 +1,9 @@
-import React, { useState} from "react";
+import { useState } from "react";
 import "../Style/Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios'
 import { auth } from "./request";
+import { post } from "../Custom/useApi";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -11,21 +11,23 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
 
- const onSubmitHandler=(e)=>{
-  e.preventDefault()
-  if( password === cpassword){
-    axios.post(`${auth.signup}`,{
-      name,
-      email,
-      password
-    }).then(res=>{
-        toast.success(res.data.message)
-        window.location.reload()
-    }).catch(err=>{
-      toast.err(err.response.data.message)
-    })
-  }
-}
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (password === cpassword) {
+      post(auth.signup, {
+        name,
+        email,
+        password,
+      })
+        .then((res) => {
+          toast.success(res.data.message);
+          window.location.reload();
+        })
+        .catch((err) => {
+          toast.err(err.response.data.message);
+        });
+    }
+  };
   return (
     <div>
       <div className="login">
@@ -77,11 +79,11 @@ function Signup() {
           </div>
         </form>
         <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        theme="light"
-      />
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          theme="light"
+        />
       </div>
     </div>
   );

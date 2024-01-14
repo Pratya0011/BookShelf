@@ -13,10 +13,10 @@ function Nav() {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  const logout=()=>{
-    localStorage.clear()
-    window.location.reload()
-  }
+  const logout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
   return (
     <nav className="bg-slate-200 fixed w-full z-20 top-0 left-0 ">
       <div className=" max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -26,12 +26,14 @@ function Nav() {
             className="h-8 mr-3 rounded-full"
             alt="Flowbite Logo"
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap">
             BookShelf
           </span>
         </NavLink>
         <div className="flex md:order-2">
-        <div className="mr-8 mt-1.5 cursor-pointer"><i className="fa-solid fa-bell"></i></div>
+          <div className="mr-8 mt-1.5 cursor-pointer">
+            <i className="fa-solid fa-bell"></i>
+          </div>
           <button
             type="button"
             className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -46,7 +48,7 @@ function Nav() {
               alt="user photo"
             />
           </button>
-          
+
           {/* Dropdown */}
           {/* Dropdown menu */}
           {isDropdownOpen && (
@@ -55,7 +57,7 @@ function Nav() {
               id="user-dropdown"
             >
               <div className="px-4 py-3">
-                <span className="block text-base font-semibold dark:text-black">
+                <span className="block text-base font-semibold">
                   Bonnie Green
                 </span>
                 <span className="block text-sm font-medium dark:text-gray-400">
@@ -133,32 +135,36 @@ function Nav() {
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-slate-200">
             <li>
               <NavLink
-              to='/'
-                className="block py-2 pl-3 pr-4 text-black  rounded md:bg-transparent  md:p-0 "
+                to="/"
+                className="block py-2 pl-3 pr-4 rounded md:bg-transparent  md:p-0 "
                 aria-current="page"
               >
-                <i className="fa-solid fa-book text-xs"></i>{" "}{" "}Library
+                <i className="fa-solid fa-book text-xs"></i> Library
               </NavLink>
             </li>
             <li>
-              <NavLink 
-              to='/activity'
-              className="block py-2 pl-3 pr-4  rounded  md:hover:bg-transparent md:p-0 dark:text-black md:dark:hover:bg-transparent">
-                <i className="fas fa-tasks text-xs"></i>{" "}{" "}Activity
+              <NavLink
+                to="/activity"
+                className="block py-2 pl-3 pr-4  rounded  md:hover:bg-transparent md:p-0 md:dark:hover:bg-transparent"
+              >
+                <i className="fas fa-tasks text-xs"></i> Activity
               </NavLink>
             </li>
             <li>
-              <NavLink 
-              to='/mylibrary'
-              className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0  dark:text-black   md:dark:hover:bg-transparent ">
-              <i className="fa-solid fa-book text-xs"></i>{" "}{" "} My Library
+              <NavLink
+                to="/mylibrary"
+                className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0 md:dark:hover:bg-transparent "
+              >
+                <i className="fa-solid fa-book text-xs"></i> My Library
               </NavLink>
             </li>
             <li>
-              <NavLink 
-              to='/premium'
-              className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0  dark:text-black   md:dark:hover:bg-transparent ">
-              <i className="fas fa-crown text-xs text-yellow-400"></i>{" "}{" "}Premium Books
+              <NavLink
+                to="/premium"
+                className="block py-2 pl-3 pr-4 rounded  md:hover:bg-transparent md:p-0 md:dark:hover:bg-transparent "
+              >
+                <i className="fas fa-crown text-xs text-yellow-400"></i> Premium
+                Books
               </NavLink>
             </li>
           </ul>
