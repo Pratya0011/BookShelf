@@ -99,7 +99,7 @@ export const premiumBooks = async (req, res) => {
 
 export const discoverBooks = async (req, res) => {
   try {
-    const books = await content.find({ bookType: "mostpopular" }).limit(4);
+    const books = await content.find({ bookType: "mostpopular" }).limit(5);
     if (!books) {
       return res.status(404).send({ message: "No books found" });
     } else {

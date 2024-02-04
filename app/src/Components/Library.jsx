@@ -1,11 +1,35 @@
 import Nav from "./Nav";
 import Discover from "./Discover";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDiscoveryBooks } from "../features/BooksSlice";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Paper from "@mui/material/Paper";
 import Catagory from "./Catagory";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Typography } from "@mui/material";
 
 function Library() {
+  const selector = useSelector((state) => state.books.discoverBooks);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchDiscoveryBooks());
+  }, [dispatch]);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+  };
   return (
     <div>
       {<Nav /> || <Skeleton />}
@@ -44,7 +68,25 @@ function Library() {
             </Paper>
           </div>
         </div>
-        <Discover />
+
+        {selector && selector.books && selector.books.length > 0 ? (
+          <>
+            <Typography
+              variant="h5"
+              color="rgb(1, 33, 72)"
+              sx={{ fontWeight: "600", margin: "2.5rem" }}
+            >
+              Discover Your Next Book
+            </Typography>
+            <Slider {...settings}>
+              {selector.books.map((item, index) => (
+                <Discover item={item} key={index} />
+              ))}
+            </Slider>
+          </>
+        ) : (
+          <></>
+        )}
         <Catagory />
       </div>
     </div>
