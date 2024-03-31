@@ -53,7 +53,7 @@ function Login() {
         toast.success(res.data.message);
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
-        localStorage.setItem("userId", res.data.userId);
+        localStorage.setItem("userId", res.data.id);
         setTimeout(() => {
           window.location.reload();
         }, 1000);
