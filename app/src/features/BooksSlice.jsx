@@ -56,6 +56,18 @@ export const fetchDiscoveryBooks = createAsyncThunk("discovery", async () => {
   }
 });
 
+export const fetchAllByCatagory = createAsyncThunk(
+  "getAlByCatagory",
+  async () => {
+    try {
+      const res = await get(books.allBooksByCatagory);
+      return res.data;
+    } catch (error) {
+      return error.data.message;
+    }
+  }
+);
+
 const initialState = {
   romanticBooks: [],
   factacyBooks: [],
@@ -63,6 +75,7 @@ const initialState = {
   poetryBooks: [],
   premiumBooks: [],
   discoveryBooks: [],
+  allBooksByCatagory: {},
   loading: false,
   errMessage: "",
 };
@@ -131,6 +144,16 @@ export const bookSlice = createSlice({
       (state.loading = false), (state.discoverBooks = action.payload);
     },
     [fetchDiscoveryBooks.rejected]: (state, action) => {
+      (state.loading = true), (state.errMessage = action.payload);
+    },
+
+    [fetchAllByCatagory.pending]: (state) => {
+      state.loading = true;
+    },
+    [fetchAllByCatagory.fulfilled]: (state, action) => {
+      (state.loading = false), (state.allBooksByCatagory = action.payload);
+    },
+    [fetchAllByCatagory.rejected]: (state, action) => {
       (state.loading = true), (state.errMessage = action.payload);
     },
   },

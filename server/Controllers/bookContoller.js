@@ -1,4 +1,5 @@
 import content from "../model/content.js";
+import { sortBooks } from "../Utils/helper.js";
 
 export const getBooks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -113,6 +114,30 @@ export const discoverBooks = async (req, res) => {
       return res.status(200).send(response);
     }
   } catch (err) {
+    return res.status(500).send({ message: "Internal server Error" });
+  }
+};
+
+export const getBooksWithCatagory = async (req, res) => {
+  try {
+    const books = await content.find();
+    const romance = sortBooks(books, "romance");
+    const fantasy = sortBooks(books, "fantasy");
+    const poetry = sortBooks(books, "poetry");
+    const flower = sortBooks(books, "flower");
+    const mostpopular = sortBooks(books, "mostpopular");
+
+    const resData = {
+      booksCount: books.length,
+      catagoryCount: 5,
+      results: [romance, fantasy, poetry, flower, mostpopular],
+    };
+    if (req.locals.accessToken) {
+      res.header("Authorization", `Bearer ${req.locals.accessToken}`);
+    }
+    res.status(200).send(resData);
+  } catch (error) {
+    console.log(error);
     return res.status(500).send({ message: "Internal server Error" });
   }
 };

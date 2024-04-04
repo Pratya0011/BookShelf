@@ -1,9 +1,18 @@
-import { useState } from "react";
-import { Box, Typography, Tabs, Tab } from "@mui/material";
-import Romance from "../Catagories/Romance";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import DynamicCatagoryMapper from "../Catagories/DynamicCatagoryMapper";
+import { fetchAllByCatagory } from "../features/BooksSlice";
 
 function Catagory() {
   const [value, setValue] = useState(0);
+  const dispatch = useDispatch();
+  const allBooksByCatagory =
+    useSelector((state) => state.books.allBooksByCatagory) || null;
+  console.log(allBooksByCatagory);
+  useEffect(() => {
+    dispatch(fetchAllByCatagory());
+  }, [dispatch]);
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -40,7 +49,8 @@ function Catagory() {
         flexGrow: 1,
         bgcolor: "background.paper",
         display: "flex",
-        height: 224,
+        height: "fit-content",
+        marginTop: "2rem",
       }}
     >
       <Tabs
@@ -49,13 +59,21 @@ function Catagory() {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider" }}
+        sx={{ borderRight: 1, borderColor: "divider", width: "15vw" }}
       >
-        <Tab label="Romance" {...a11yProps(0)} />
+        {allBooksByCatagory &&
+          allBooksByCatagory?.results?.length > 0 &&
+          allBooksByCatagory?.results?.map((item, index) => (
+            <Tab label={item?.label} key={index} {...a11yProps(index)} />
+          ))}
       </Tabs>
-      <TabPanel value={value} index={0}>
-        <Romance />
-      </TabPanel>
+      {allBooksByCatagory &&
+        allBooksByCatagory?.results?.length > 0 &&
+        allBooksByCatagory?.results?.map((item, index) => (
+          <TabPanel index={index} key={index} value={value}>
+            <DynamicCatagoryMapper books={item} />
+          </TabPanel>
+        ))}
     </Box>
   );
 }
