@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DynamicCatagoryMapper from "../Catagories/DynamicCatagoryMapper";
 import { fetchAllByCatagory } from "../features/BooksSlice";
+import Loader from "../Custom/Loader";
 
 function Catagory() {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
-  const allBooksByCatagory =
-    useSelector((state) => state.books.allBooksByCatagory) || null;
+  const { allBooksByCatagory, loading } =
+    useSelector((state) => state.books) || null;
   console.log(allBooksByCatagory);
   useEffect(() => {
     dispatch(fetchAllByCatagory());
@@ -44,37 +45,40 @@ function Catagory() {
     setValue(newValue);
   };
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: "background.paper",
-        display: "flex",
-        height: "fit-content",
-        marginTop: "2rem",
-      }}
-    >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider", width: "15vw" }}
+    <>
+      <Box
+        sx={{
+          flexGrow: 1,
+          bgcolor: "background.paper",
+          display: "flex",
+          height: "fit-content",
+          marginTop: "2rem",
+        }}
       >
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={{ borderRight: 1, borderColor: "divider", width: "15vw" }}
+        >
+          {allBooksByCatagory &&
+            allBooksByCatagory?.results?.length > 0 &&
+            allBooksByCatagory?.results?.map((item, index) => (
+              <Tab label={item?.label} key={index} {...a11yProps(index)} />
+            ))}
+        </Tabs>
         {allBooksByCatagory &&
           allBooksByCatagory?.results?.length > 0 &&
           allBooksByCatagory?.results?.map((item, index) => (
-            <Tab label={item?.label} key={index} {...a11yProps(index)} />
+            <TabPanel index={index} key={index} value={value}>
+              <DynamicCatagoryMapper books={item} />
+            </TabPanel>
           ))}
-      </Tabs>
-      {allBooksByCatagory &&
-        allBooksByCatagory?.results?.length > 0 &&
-        allBooksByCatagory?.results?.map((item, index) => (
-          <TabPanel index={index} key={index} value={value}>
-            <DynamicCatagoryMapper books={item} />
-          </TabPanel>
-        ))}
-    </Box>
+      </Box>
+      {<Loader visible={loading} />}
+    </>
   );
 }
 

@@ -11,9 +11,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Typography } from "@mui/material";
+import Loader from "../Custom/Loader";
 
 function Library() {
   const selector = useSelector((state) => state.books.discoverBooks);
+  const loader = useSelector((state) => state.books.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,6 +34,7 @@ function Library() {
   };
   return (
     <div>
+      {loader && <Loader visible={loader} />}
       {<Nav /> || <Skeleton />}
       <div className="mt-16 ">
         <div className="flex bg-slate-100">
