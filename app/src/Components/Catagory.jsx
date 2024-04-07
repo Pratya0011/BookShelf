@@ -10,7 +10,7 @@ function Catagory() {
   const dispatch = useDispatch();
   const { allBooksByCatagory, loading } =
     useSelector((state) => state.books) || null;
-  console.log(allBooksByCatagory);
+  const loader = useSelector((state) => state.books.loading);
   useEffect(() => {
     dispatch(fetchAllByCatagory());
   }, [dispatch]);
@@ -18,19 +18,22 @@ function Catagory() {
     const { children, value, index, ...other } = props;
 
     return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
+      <>
+        {loader && <Loader visible={loader} />}
+        <div
+          role="tabpanel"
+          hidden={value !== index}
+          id={`vertical-tabpanel-${index}`}
+          aria-labelledby={`vertical-tab-${index}`}
+          {...other}
+        >
+          {value === index && (
+            <Box sx={{ p: 3 }}>
+              <Typography>{children}</Typography>
+            </Box>
+          )}
+        </div>
+      </>
     );
   }
 
