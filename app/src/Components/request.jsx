@@ -5,6 +5,7 @@ export const auth = {
   google: `${baseUrl}/user/OAuth`,
   signup: `${baseUrl}/user/signup`,
   authenticate: `${baseUrl}/user/authenticate`,
+  userDetails: `${baseUrl}/user/details/get_user_details`,
 };
 
 export const books = {

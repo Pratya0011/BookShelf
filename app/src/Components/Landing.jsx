@@ -1,38 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import Login from "./Login";
 import "../Style/Landing.css";
 import Signup from "./Signup";
 import { setIsLogin } from "../features/appSlice";
-import img from '../Image/BS Final.png'
+import img from "../Image/BS Final.png";
 
 function Landing() {
   const [span, setSpan] = useState("Sign up");
-  const [content, setContent] = useState(`Don't have an account?`)
-  const formContainerRef = useRef(null)
-  const loginForm = useSelector(state=>state.app.isLogin)
-  const dispatch = useDispatch()
+  const [content, setContent] = useState(`Don't have an account?`);
+  const formContainerRef = useRef(null);
+  const loginForm = useSelector((state) => state.app.isLogin);
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    formContainerRef.current.classList.add('loaded');
-  },[])
+  useEffect(() => {
+    formContainerRef.current.classList.add("loaded");
+  }, []);
 
   const toggleForm = () => {
     if (loginForm) {
-      dispatch(setIsLogin(false))
+      dispatch(setIsLogin(false));
       setSpan("Login");
-      setContent(`Already have an account?`)
+      setContent(`Already have an account?`);
     } else {
-      dispatch(setIsLogin(true))
+      dispatch(setIsLogin(true));
       setSpan("Sign up");
-      setContent(`Don't have an account?`)
+      setContent(`Don't have an account?`);
     }
   };
   return (
     <div className="landing">
       <div className="container">
         <div className="image">
-            <div className="app-title">BookShelf</div>
+          <div className="app-title">BookShelf</div>
           <div className="about">
             We provides users with a convenient digital space to curate,
             organize, and engage with their favorite books, connect with fellow

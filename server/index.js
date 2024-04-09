@@ -5,6 +5,7 @@ import cors from "cors";
 import { config } from "dotenv";
 import userRouter from "./Routes/userRoutes.js";
 import bookRouter from "./Routes/bookRoutes.js";
+import userDetailRouter from "./Routes/userDetailRouter.js";
 import { authenticateRoute } from "./Utils/Utils.js";
 
 config();
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/user", userRouter);
 
 app.use(authenticateRoute);
+app.use("/user/details", userDetailRouter);
 app.use("/books", bookRouter);
 connection
   .then(() => {

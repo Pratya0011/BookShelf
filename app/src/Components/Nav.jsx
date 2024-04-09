@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import img from "../Image/BS Final dark.png";
-import img1 from "../Image/BS Final.png";
 import { NavLink } from "react-router-dom";
+import img from "../Image/BS Final dark.png";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);

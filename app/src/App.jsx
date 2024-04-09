@@ -7,10 +7,17 @@ import Library from "./Components/Library";
 import Activity from "./Components/Activity";
 import MyLibrary from "./Components/MyLibrary";
 import Premium from "./Components/Premium";
-import { post } from "./Custom/useApi";
+import { post, get } from "./Custom/useApi";
+import { useDispatch } from "react-redux";
+import { setUserData } from "./features/appSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "./Custom/Loader";
 
 function App() {
   const [state, setState] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const authenticate = () => {
@@ -40,29 +47,60 @@ function App() {
     authenticate();
   }, [state]);
 
+  useEffect(() => {
+    if (state) {
+      let id = localStorage.getItem("userId");
+      setLoading(true);
+      get(auth.userDetails, {}, id)
+        .then((res) => {
+          if (res.status === 200) {
+            setLoading(false);
+            dispatch(setUserData(res.data));
+          } else {
+            toast.error(res.response.data.message);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message);
+        });
+    }
+  }, [state, dispatch]);
+
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={state ? <Library /> : <Landing />}
-          ></Route>
-          <Route
-            path="/activity"
-            element={state ? <Activity /> : <Landing />}
-          ></Route>
-          <Route
-            path="/mylibrary"
-            element={state ? <MyLibrary /> : <Landing />}
-          ></Route>
-          <Route
-            path="/premium"
-            element={state ? <Premium /> : <Landing />}
-          ></Route>
-        </Routes>
-      </Router>
+      {loading ? (
+        <>
+          <Loader visible={loading} />
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            theme="light"
+          />
+        </>
+      ) : (
+        <Router>
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={state ? <Library /> : <Landing />}
+            ></Route>
+            <Route
+              path="/activity"
+              element={state ? <Activity /> : <Landing />}
+            ></Route>
+            <Route
+              path="/mylibrary"
+              element={state ? <MyLibrary /> : <Landing />}
+            ></Route>
+            <Route
+              path="/premium"
+              element={state ? <Premium /> : <Landing />}
+            ></Route>
+          </Routes>
+        </Router>
+      )}
     </div>
   );
 }

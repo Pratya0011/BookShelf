@@ -121,23 +121,21 @@ export const discoverBooks = async (req, res) => {
 export const getBooksWithCatagory = async (req, res) => {
   try {
     const books = await content.find();
-    const romance = sortBooks(books, "romance");
-    const fantasy = sortBooks(books, "fantasy");
-    const poetry = sortBooks(books, "poetry");
-    const flower = sortBooks(books, "flower");
-    const mostpopular = sortBooks(books, "mostpopular");
+    const romance = sortBooks(books, "romance", 8);
+    const fantasy = sortBooks(books, "fantasy", 8);
+    const poetry = sortBooks(books, "poetry", 8);
+    const flower = sortBooks(books, "flower", 8);
 
     const resData = {
       booksCount: books.length,
       catagoryCount: 5,
-      results: [romance, fantasy, poetry, flower, mostpopular],
+      results: [romance, fantasy, poetry, flower],
     };
     if (req.locals.accessToken) {
       res.header("Authorization", `Bearer ${req.locals.accessToken}`);
     }
     res.status(200).send(resData);
   } catch (error) {
-    console.log(error);
     return res.status(500).send({ message: "Internal server Error" });
   }
 };

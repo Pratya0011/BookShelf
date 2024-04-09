@@ -1,0 +1,10 @@
+.genere-container {
+  margin-bottom: 1rem;
+}
+.genere-books {
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+}
+.genere-books img {
+  height: 200px !important;
+  width: 150px;
+}
