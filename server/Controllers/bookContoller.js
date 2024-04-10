@@ -2,15 +2,21 @@ import content from "../model/content.js";
 import { sortBooks } from "../Utils/helper.js";
 
 export const getBooks = async (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = 10;
-  const skip = (page - 1) * limit;
+  const { genre } = req.query;
   try {
-    const books = await content.find().skip(skip).limit(limit);
-    res.status(200).send({
-      books,
-      booksCount: books.length,
-    });
+    if (genre) {
+      const books = await content.find({ bookType: genre });
+      res.status(200).send({
+        booksCount: books.length,
+        books,
+      });
+    } else {
+      const books = await content.find();
+      res.status(200).send({
+        booksCount: books.length,
+        books,
+      });
+    }
   } catch (err) {
     res.status(500).send({
       message: "Internal server error",

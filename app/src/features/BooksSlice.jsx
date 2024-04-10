@@ -2,6 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { books } from "../Components/request";
 import { get } from "../Custom/useApi";
 
+export const getBooksByGenre = createAsyncThunk(
+  "booksByGenre",
+  async (payload) => {
+    try {
+      const res = await get(books.allBooks, {}, "", payload);
+      return res.data;
+    } catch (error) {
+      return error.data.message;
+    }
+  }
+);
+
 export const fetchRomanticBooks = createAsyncThunk("romantic", async () => {
   try {
     const res = await get(books.romanceBooks);
@@ -69,6 +81,7 @@ export const fetchAllByCatagory = createAsyncThunk(
 );
 
 const initialState = {
+  bookByGenre: [],
   romanticBooks: [],
   factacyBooks: [],
   flowerBooks: [],
@@ -85,6 +98,17 @@ export const bookSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [getBooksByGenre.pending]: (state) => {
+      state.loading = true;
+    },
+    [getBooksByGenre.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.bookByGenre = action.payload;
+    },
+    [getBooksByGenre.rejected]: (state) => {
+      state.loading = true;
+    },
+
     [fetchRomanticBooks.pending]: (state) => {
       state.loading = true;
     },

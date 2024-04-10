@@ -1,9 +1,14 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import "../Style/Genere.css";
+import { useNavigate } from "react-router-dom";
 
 function DynamicCatagoryMapper({ books }) {
-  console.log(books);
+  const navigate = useNavigate();
+
+  const viewAllHandler = (label) => {
+    navigate(`/${label}`);
+  };
   return (
     <>
       <Box
@@ -12,9 +17,19 @@ function DynamicCatagoryMapper({ books }) {
           marginBottom: "1rem",
           display: "flex",
           justifyContent: "flex-end",
+          cursor: "pointer",
         }}
       >
-        <Typography>view all</Typography>
+        <Typography
+          sx={{
+            "&:hover": {
+              color: "blue",
+            },
+          }}
+          onClick={() => viewAllHandler(books?.label)}
+        >
+          view all
+        </Typography>
       </Box>
       <Grid sx={{ display: "flex", flexWrap: "wrap" }}>
         {books?.books?.map((item, index) => (

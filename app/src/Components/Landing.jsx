@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Login from "./Login";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../Style/Landing.css";
-import Signup from "./Signup";
 import { setIsLogin } from "../features/appSlice";
-import img from "../Image/BS Final.png";
+import Login from "./Login";
+import Signup from "./Signup";
 
 function Landing() {
   const [span, setSpan] = useState("Sign up");

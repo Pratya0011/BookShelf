@@ -13,6 +13,7 @@ import { setUserData } from "./features/appSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Custom/Loader";
+import Generes from "./Catagories/Generes";
 
 function App() {
   const [state, setState] = useState(false);
@@ -97,6 +98,10 @@ function App() {
             <Route
               path="/premium"
               element={state ? <Premium /> : <Landing />}
+            ></Route>
+            <Route
+              path="/:label"
+              element={state ? <Generes /> : <Landing />}
             ></Route>
           </Routes>
         </Router>
