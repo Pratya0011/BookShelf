@@ -81,7 +81,7 @@ export const fetchAllByCatagory = createAsyncThunk(
 );
 
 const initialState = {
-  bookByGenre: [],
+  bookByGenre: {},
   romanticBooks: [],
   factacyBooks: [],
   flowerBooks: [],

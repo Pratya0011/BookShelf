@@ -18,6 +18,7 @@ function Signup() {
         name,
         email,
         password,
+        role: "user",
       })
         .then((res) => {
           toast.success(res.data.message);

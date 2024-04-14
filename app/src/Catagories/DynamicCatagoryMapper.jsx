@@ -1,16 +1,27 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Style/Genere.css";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Custom/Loader";
 
 function DynamicCatagoryMapper({ books }) {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (books?.books?.length > 0) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [loading]);
 
   const viewAllHandler = (label) => {
     navigate(`/${label}`);
   };
   return (
     <>
+      <Loader visible={loading} />
       <Box
         sx={{
           width: "85%",

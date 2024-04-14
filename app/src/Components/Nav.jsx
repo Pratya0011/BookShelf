@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import img from "../Image/BS Final dark.png";
+import { useSelector } from "react-redux";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { userData } = useSelector((state) => state.app);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,6 +17,12 @@ function Nav() {
   const logout = () => {
     localStorage.clear();
     window.location.reload();
+  };
+
+  const avatarHandler = (name) => {
+    return name?.split(" ")[1]
+      ? `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`
+      : name?.split(" ")[0][0];
   };
   return (
     <nav className="bg-slate-200 fixed w-full z-20 top-0 left-0 ">
@@ -41,11 +49,25 @@ function Nav() {
             onClick={toggleDropdown}
           >
             <span className="sr-only">Open user menu</span>
-            <img
-              className="w-8 h-8 rounded-full"
-              src="https://lh3.googleusercontent.com/a/AAcHTtfzuq5u9XfSFZ5Aj0NmWot1mLB2lBCpuMZ8r399SeDWV8M=s96-c"
-              alt="user photo"
-            />
+            {userData?.user?.picture !== "" ? (
+              <img
+                className="w-8 h-8 rounded-full"
+                src={userData?.user?.picture}
+                alt="user photo"
+              />
+            ) : (
+              <div
+                className="w-8 h-8 rounded-full"
+                style={{
+                  backgroundColor: "white",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {avatarHandler(userData?.user?.name).toUpperCase()}
+              </div>
+            )}
           </button>
 
           {/* Dropdown */}
@@ -57,10 +79,10 @@ function Nav() {
             >
               <div className="px-4 py-3">
                 <span className="block text-base font-semibold">
-                  Bonnie Green
+                  {userData?.user?.name}
                 </span>
                 <span className="block text-sm font-medium dark:text-gray-400">
-                  name@flowbite.com
+                  {userData?.user?.email}
                 </span>
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">
