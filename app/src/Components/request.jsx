@@ -17,4 +17,5 @@ export const books = {
   premiumBooks: `${baseUrl}/books/getpremium`,
   discoverBooks: `${baseUrl}/books/discover`,
   allBooksByCatagory: `${baseUrl}/books/books-by-cat`,
+  getBookById: `${baseUrl}/books/getbookbyid`,
 };

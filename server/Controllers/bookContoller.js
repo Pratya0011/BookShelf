@@ -145,3 +145,32 @@ export const getBooksWithCatagory = async (req, res) => {
     return res.status(500).send({ message: "Internal server Error" });
   }
 };
+
+export const getBooksByID = async (req, res) => {
+  const bookId = req.params.bookId;
+
+  try {
+    if (!bookId) {
+      res.status(400).send({
+        error: "Invalid book id",
+        message: "Could not fetch book details",
+      });
+    } else {
+      const book = await content.findById(bookId);
+      if (!book) {
+        res.status(400).send({
+          error: "no book with the given id",
+          message: "Could not fetch book details",
+        });
+      } else {
+        res.status(200).send({
+          book: book,
+        });
+      }
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: "Internal server error",
+    });
+  }
+};

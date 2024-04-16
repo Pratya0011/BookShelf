@@ -14,6 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Custom/Loader";
 import Generes from "./Catagories/Generes";
+import BookDetails from "./Components/BookDetails";
 
 function App() {
   const [state, setState] = useState(false);
@@ -103,6 +104,7 @@ function App() {
               path="/:label"
               element={state ? <Generes /> : <Landing />}
             ></Route>
+            <Route path="/book/:bookId" element={<BookDetails />}></Route>
           </Routes>
         </Router>
       )}

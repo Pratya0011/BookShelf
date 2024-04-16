@@ -1,14 +1,15 @@
+import { Grid, Paper, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooksByGenre } from "../features/BooksSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Nav from "../Components/Nav";
 import Loader from "../Custom/Loader";
-import { Grid, Paper, Typography } from "@mui/material";
 import "../Style/Genere.css";
+import { getBooksByGenre } from "../features/BooksSlice";
 
 function Generes() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { label } = useParams();
   const { loading, bookByGenre } = useSelector((state) => state.books);
 
@@ -17,7 +18,15 @@ function Generes() {
       genre: label,
     };
     dispatch(getBooksByGenre(req));
-  }, []);
+  }, [dispatch, label]);
+
+  const viewBookDetailsHandler = (bookId) => {
+    navigate(`/book/${bookId}`);
+  };
+
+  if (loading) {
+    return <Loader visible={loading} />;
+  }
   return (
     <>
       <Nav />
@@ -30,7 +39,11 @@ function Generes() {
           }}
         >
           {bookByGenre?.books?.map((item, index) => (
-            <Grid className="genere-container" key={index}>
+            <Grid
+              className="genere-container"
+              key={index}
+              onClick={() => viewBookDetailsHandler(item?._id)}
+            >
               <Paper
                 className="fadeInEffect"
                 style={{

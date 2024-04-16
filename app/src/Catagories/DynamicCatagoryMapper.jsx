@@ -19,6 +19,10 @@ function DynamicCatagoryMapper({ books }) {
   const viewAllHandler = (label) => {
     navigate(`/${label}`);
   };
+
+  const viewBookDetailsHandler = (bookId) => {
+    navigate(`/book/${bookId}`);
+  };
   return (
     <>
       <Loader visible={loading} />
@@ -44,7 +48,11 @@ function DynamicCatagoryMapper({ books }) {
       </Box>
       <Grid sx={{ display: "flex", flexWrap: "wrap" }}>
         {books?.books?.map((item, index) => (
-          <Grid className="genere-container" key={index}>
+          <Grid
+            className="genere-container"
+            key={index}
+            onClick={() => viewBookDetailsHandler(item?._id)}
+          >
             <Paper
               style={{
                 border: "1px solid lightGrey",

@@ -4,6 +4,7 @@ import {
   fantacyBooks,
   flowerBooks,
   getBooks,
+  getBooksByID,
   getBooksWithCatagory,
   poetryBooks,
   premiumBooks,
@@ -20,5 +21,6 @@ router.get("/getpoetry", poetryBooks);
 router.get("/getflower", flowerBooks);
 router.get("/getpremium", premiumBooks);
 router.get("/books-by-cat", getBooksWithCatagory);
+router.get("/getbookbyid/:bookId", getBooksByID);
 
 export default router;
