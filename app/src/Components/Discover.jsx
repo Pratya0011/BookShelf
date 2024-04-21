@@ -4,9 +4,15 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Paper from "@mui/material/Paper";
 import "../Style/Discover.css";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Discover({ item }) {
   const loading = useSelector((state) => state.books.loading);
+  const navigate = useNavigate();
+
+  const viewBookDetailsHandler = (bookId) => {
+    navigate(`/book/${bookId}`);
+  };
 
   return (
     <div>
@@ -14,7 +20,10 @@ function Discover({ item }) {
         <Skeleton />
       ) : (
         <div>
-          <div className="discover-container">
+          <div
+            className="discover-container"
+            onClick={() => viewBookDetailsHandler(item?._id)}
+          >
             <Paper
               style={{
                 border: "1px solid lightGrey",
@@ -26,14 +35,6 @@ function Discover({ item }) {
                 <img src={item.image} />
                 <div className="price-contaner">
                   <span>₹ {item.price}</span>
-                  <span>
-                    <Button
-                      variant="contained"
-                      sx={{ backgroundColor: "rgb(1, 33, 72)" }}
-                    >
-                      Buy
-                    </Button>
-                  </span>
                 </div>
               </div>
             </Paper>

@@ -1,0 +1,8 @@
+.image-container {
+  height: 60vh;
+  width: 30vw;
+}
+
+.image-container img {
+  height: 416px !important;
+}

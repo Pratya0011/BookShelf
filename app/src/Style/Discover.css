@@ -1,5 +1,6 @@
 .discover-container {
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 .discover-books {
   padding: 3rem 3rem 1.5rem 3rem;
@@ -10,7 +11,7 @@
 }
 .price-contaner {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 1rem;
   font-weight: 600;
   font-size: 18px;
