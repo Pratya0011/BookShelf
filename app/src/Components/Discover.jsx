@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
+import Paper from "@mui/material/Paper";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Paper from "@mui/material/Paper";
-import "../Style/Discover.css";
-import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "../Style/Discover.css";
 
 function Discover({ item }) {
   const loading = useSelector((state) => state.books.loading);

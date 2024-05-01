@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { get } from "../Custom/useApi";
 import { books } from "./request";
@@ -79,14 +79,26 @@ function BookDetails() {
               </Typography>
               <Typography>{book.have_read} Have read</Typography>
             </Grid>
-            <Grid display="flex" alignItems="center" gap={3}>
-              <Button color="primary" variant="outlined">
-                want to read
-              </Button>
-              <Button color="primary" variant="contained">
-                start Reading
-              </Button>
-            </Grid>
+            {book?.price > 0 && <Typography>{`₹ ${book.price}`}</Typography>}
+            {book?.price === 0 ? (
+              <Grid display="flex" alignItems="center" gap={3}>
+                <Button color="primary" variant="outlined">
+                  want to read
+                </Button>
+                <Button color="primary" variant="contained">
+                  start Reading
+                </Button>
+              </Grid>
+            ) : (
+              <Grid display="flex" alignItems="center" gap={3}>
+                <Button color="primary" variant="outlined">
+                  Add to cart
+                </Button>
+                <Button color="primary" variant="contained">
+                  Buy Now
+                </Button>
+              </Grid>
+            )}
             <Grid>
               <Typography variant="subtitle2">{book.description}</Typography>
             </Grid>

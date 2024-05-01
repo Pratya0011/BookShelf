@@ -1,0 +1,13 @@
+.discover-container {
+  width: fit-content;
+}
+
+.price-contaner {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 18px;
+  align-items: center;
+  color: rgb(1, 33, 72);
+}
