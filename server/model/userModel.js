@@ -53,6 +53,12 @@ const userModel = new Schema({
       default: [],
     },
   },
+  cart: [
+    {
+      book_id: String,
+      count: Number,
+    },
+  ],
 });
 
 const User = model("user", userModel);

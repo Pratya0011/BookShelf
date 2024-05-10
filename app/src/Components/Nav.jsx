@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import img from "../Image/BS Final dark.png";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import img from "../Image/BS Final dark.png";
 
 function Nav() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { userData } = useSelector((state) => state.app);
@@ -17,6 +18,10 @@ function Nav() {
   const logout = () => {
     localStorage.clear();
     window.location.reload();
+  };
+
+  const openCartHandler = () => {
+    navigate("/cart");
   };
 
   const avatarHandler = (name) => {
@@ -40,6 +45,9 @@ function Nav() {
         <div className="flex md:order-2">
           <div className="mr-8 mt-1.5 cursor-pointer">
             <i className="fa-solid fa-bell"></i>
+          </div>
+          <div className="mr-8 mt-1.5 cursor-pointer" onClick={openCartHandler}>
+            <i className="fa fa-shopping-cart" aria-hidden="true"></i>
           </div>
           <button
             type="button"

@@ -1,11 +1,11 @@
+import { Grid, Paper } from "@mui/material";
 import { useEffect } from "react";
-import Nav from "./Nav";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../Custom/Loader";
-import { fetchPremiumBooks } from "../features/BooksSlice";
-import { Button, Grid, Paper } from "@mui/material";
-import "../Style/Premium.css";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Custom/Loader";
+import "../Style/Premium.css";
+import { fetchPremiumBooks } from "../features/BooksSlice";
+import Nav from "./Nav";
 
 function Premium() {
   const dispatch = useDispatch();
@@ -43,14 +43,6 @@ function Premium() {
                   <img src={item.image} />
                   <Grid className="price-contaner">
                     <span>₹ {item.price}</span>
-                    <span>
-                      <Button
-                        variant="outlined"
-                        sx={{ color: "rgb(1, 33, 72)" }}
-                      >
-                        Buy Now
-                      </Button>
-                    </span>
                   </Grid>
                 </Grid>
               </Paper>

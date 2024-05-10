@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Custom/Loader";
 import Generes from "./Catagories/Generes";
 import BookDetails from "./Components/BookDetails";
+import Cart from "./Components/Cart";
 
 function App() {
   const [state, setState] = useState(false);
@@ -104,7 +105,14 @@ function App() {
               path="/:label"
               element={state ? <Generes /> : <Landing />}
             ></Route>
-            <Route path="/book/:bookId" element={<BookDetails />}></Route>
+            <Route
+              path="/book/:bookId"
+              element={state ? <BookDetails /> : <Landing />}
+            ></Route>
+            <Route
+              psth="/cart"
+              element={state ? <Cart /> : <Landing />}
+            ></Route>
           </Routes>
         </Router>
       )}
