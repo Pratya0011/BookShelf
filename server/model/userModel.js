@@ -57,6 +57,7 @@ const userModel = new Schema({
     {
       book_id: String,
       count: Number,
+      price: Number,
     },
   ],
 });

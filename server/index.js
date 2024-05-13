@@ -6,6 +6,7 @@ import { config } from "dotenv";
 import userRouter from "./Routes/userRoutes.js";
 import bookRouter from "./Routes/bookRoutes.js";
 import userDetailRouter from "./Routes/userDetailRouter.js";
+import libraryRouter from "./Routes/libraryRoutes.js";
 import { authenticateRoute } from "./Utils/Utils.js";
 
 config();
@@ -29,6 +30,7 @@ app.use("/user", userRouter);
 app.use(authenticateRoute);
 app.use("/user/details", userDetailRouter);
 app.use("/books", bookRouter);
+app.use("/library", libraryRouter);
 connection
   .then(() => {
     app.listen(process.env.PORT, () => {
