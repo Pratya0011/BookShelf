@@ -27,7 +27,7 @@ export const addToCart = async (req, res) => {
           },
         };
 
-        const options = { new: true }; // To return the modified document
+        const options = { new: true };
 
         const updatedUser = await User.findOneAndUpdate(
           filter,
