@@ -29,30 +29,29 @@ export const addToCart = async (req, res) => {
 
         const options = { new: true };
 
-        const updatedUser = await User.findOneAndUpdate(
-          filter,
-          update,
-          options
-        );
-        const updatedItem = updatedUser.cart.find(
-          (item) => item.book_id === body.book_id
-        );
-        res.status(200).send(updatedItem);
+        await User.findOneAndUpdate(filter, update, options);
+        res.status(200).send({
+          success: true,
+          message: "Item added to cart",
+        });
       } else {
-        const userCart = await User.findByIdAndUpdate(
+        await User.findByIdAndUpdate(
           id,
           {
             $push: { cart: body },
           },
           { new: true }
         );
-        const itemForRes = userCart.cart.find(
-          (item) => item.book_id === body.book_id
-        );
-        res.status(200).send(itemForRes);
+        res.status(200).send({
+          success: true,
+          message: "Item added to cart",
+        });
       }
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send({
+      error: error,
+      message: "Internal Server Error",
+    });
   }
 };

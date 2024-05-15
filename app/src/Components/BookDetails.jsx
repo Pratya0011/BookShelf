@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { get } from "../Custom/useApi";
-import { books } from "./request";
+import { get, patch } from "../Custom/useApi";
+import { books, library } from "./request";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Loader from "../Custom/Loader";
 import Nav from "./Nav";
 import {
@@ -15,9 +17,11 @@ import {
 } from "@mui/material";
 import "../Style/BookDetails.css";
 import RatingIcon from "../Utils/RatingIcon";
+import { useSelector } from "react-redux";
 
 function BookDetails() {
   const [loading, setLoading] = useState(false);
+  const { user: userDetails } = useSelector((state) => state.app.userData);
   const [book, setBook] = useState({});
   const { bookId } = useParams();
 
@@ -32,6 +36,27 @@ function BookDetails() {
       })
       .finally(() => setLoading(false));
   }, [bookId]);
+
+  const addToCartHandler = async () => {
+    const request = {
+      book_id: bookId,
+      count: 1,
+      price: book?.price,
+    };
+    try {
+      const response = await patch(
+        library.addToCart,
+        request,
+        {},
+        userDetails?._id
+      );
+      if (response.status === 200) {
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   if (loading) {
     return <Loader visible={loading} />;
@@ -91,7 +116,11 @@ function BookDetails() {
               </Grid>
             ) : (
               <Grid display="flex" alignItems="center" gap={3}>
-                <Button color="primary" variant="outlined">
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  onClick={addToCartHandler}
+                >
                   Add to cart
                 </Button>
                 <Button color="primary" variant="contained">
@@ -128,6 +157,12 @@ function BookDetails() {
           )}
         </Grid>
       </Grid>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="light"
+      />
     </>
   );
 }

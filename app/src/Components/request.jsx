@@ -19,3 +19,7 @@ export const books = {
   allBooksByCatagory: `${baseUrl}/books/books-by-cat`,
   getBookById: `${baseUrl}/books/getbookbyid`,
 };
+
+export const library = {
+  addToCart: `${baseUrl}/library/cart`,
+};

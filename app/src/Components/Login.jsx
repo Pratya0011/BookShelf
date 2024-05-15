@@ -33,7 +33,6 @@ function Login() {
         setTimeout(() => {
           window.location.reload();
         }, 1000);
-        console.log(res.data.userId);
       })
       .catch((err) => {
         console.log(err);
