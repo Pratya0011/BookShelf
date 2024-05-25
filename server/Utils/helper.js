@@ -1,3 +1,5 @@
+export const base_url = "http://localhost:8080";
+
 export const sortBooks = (books, bookType, limit) => {
   const filteredBooks = books
     ?.filter((item) => item?.bookType === bookType)

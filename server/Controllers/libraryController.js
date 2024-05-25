@@ -1,4 +1,6 @@
+import { base_url } from "../Utils/helper.js";
 import User from "../model/userModel.js";
+import { getByIdApi } from "../__api/api.js";
 
 export const addToCart = async (req, res) => {
   const { id } = req.params;
@@ -52,6 +54,47 @@ export const addToCart = async (req, res) => {
     res.status(500).send({
       error: error,
       message: "Internal Server Error",
+    });
+  }
+};
+
+export const getCartDetails = async (req, res) => {
+  const { id, access, refresh } = req.headers;
+  try {
+    if (!id || !access || !refresh) {
+      res.status(400).send({
+        error: true,
+        message: "Could not fetch cart details",
+      });
+    }
+    const user = await User.findById(id);
+    const cartDetails = user.cart;
+
+    const headers = {
+      access: access,
+      refresh: refresh,
+      id: id,
+    };
+
+    const allDetails = cartDetails.map(async (item) => {
+      const response = await getByIdApi(
+        `${base_url}/books/getbookbyid`,
+        item.book_id,
+        headers
+      );
+      return response.data;
+    });
+    const cartDetailsForUser = await Promise.all(allDetails);
+
+    res.status(200).send({
+      count: cartDetailsForUser.length,
+      result: cartDetailsForUser,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      error: err,
+      message: "Internal server error",
     });
   }
 };
